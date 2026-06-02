@@ -1,4 +1,5 @@
 from flask import Flask
+import random
 
 app = Flask(__name__)
 
@@ -7,9 +8,6 @@ def hello_world():
     return '<h1>Hello, World!</h1>'
 
 app.run(debug=True)
-
-from flask import Flask
-import random
 
 app = Flask(__name__)
 facts_list = ["Elon Musk afirma que as redes sociais são projetadas para nos manter dentro da plataforma, para que passemos o máximo de tempo possível visualizando conteúdo.",            
@@ -24,5 +22,12 @@ def index():
 @app.route("/random_fact")
 def facts():
     return f'<p>{random.choice(facts_list)}</p><br><a href="/">Voltar para a página inicial</a>'
+
+@app.route("/coin_flip")
+def coin_flip():
+    result = "Cara" if random.choice([True, False]) else "Coroa"
+    return f'<p>O resultado do lançamento da moeda é: {result}</p><br><a href="/"> Voltar para pagina principal</a>'
+
+
 
 app.run(debug=True)
